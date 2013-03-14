@@ -5,5 +5,7 @@ A joint effort to write the [Dawkins' Weasel algorithm][wikipedia] in as many la
 
 Algorithm described [here][algorithm].
 
+Each implementation should only be one file and placed in the root folder.
+
 [wikipedia]: http://en.wikipedia.org/wiki/Weasel_program
 [algorithm]: http://rationalwiki.org/wiki/Dawkins_weasel
