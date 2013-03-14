@@ -1,5 +1,9 @@
-WEASEL
+A whole lotta weasels
 ======
 
-My trial at Richard Dawkin's Weasel program. How a random string of characters can become a goal string via evolution and mutation.
-Written in Python
+A joint effort to write the [Dawkins' Weasel algorithm][wikipedia] in as many languages as possible, using the language's specific idioms.
+
+Algorithm described [here][algorithm].
+
+[wikipedia]: http://en.wikipedia.org/wiki/Weasel_program
+[algorithm]: http://rationalwiki.org/wiki/Dawkins_weasel
