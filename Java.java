@@ -4,7 +4,7 @@ class Java {
 
     public static void main(String[] args) {
         Application a = new Application();
-        a.run("ipuh", 4, 10);
+        a.run("ipgfuh", 4, 10);
         
     }
 }
@@ -15,7 +15,6 @@ class Application {
 
     public void run (String goal, int mutationRate, int numberOfChildren) {
         Individual i = new Individual("hieurh");
-        i.reproduceChildren(mutationRate, numberOfChildren);
         ArrayList<Individual> children = i.reproduceChildren(mutationRate, numberOfChildren);
         for (Individual c : children) {
             System.out.println(c.getLookslike());
@@ -46,7 +45,7 @@ class Individual {
         }
 
 
-        return new ArrayList<Individual>();
+        return children;
     }
 
 
