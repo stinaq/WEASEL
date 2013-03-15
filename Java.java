@@ -1,4 +1,5 @@
-    import java.util.Random;
+import java.util.Random;
+import java.util.ArrayList;
 class Java {
 
     public static void main(String[] args) {
@@ -10,35 +11,34 @@ class Java {
 
 
 class Application {
-    private String goal;
-    private int mutationRate;
-    private int numberOfChildren;
 
-    public Application(String goal, int mutationRate, int numberOfChildren) {
-        this.goal = goal;
-        this.mutationRate = mutationRate;
-        this.numberOfChildren = numberOfChildren;
+    public Application() {
+
+    }
+
+    public void run(String goal, int mutationRate, int numberOfChildren) {
+
     }
 
 }
 
 // import java.lang.StringBuilder; 
-class Parent {
+class Individual {
 
     private String lookslike;
 
-    public Parent(String lookslike) {
+    public Individual(String lookslike) {
         this.lookslike = lookslike;
     }
 
-    public String reproduceFavouriteChild(String goal, int mutationRate, int numberOfChildren) {
-        return "";
+    public ArrayList<Individual> reproduceChildren(int mutationRate, int numberOfChildren) {
+        return new ArrayList<Individual>();
     }
 
 
-    public String reproduceChild(String parent, int mutationRate) {
+    public String reproduceChild(int mutationRate) {
         StringBuilder builder = new StringBuilder();
-        for(char character : parent.toCharArray()) {
+        for(char character : lookslike.toCharArray()) {
             builder.append(mutateCharacter(character, mutationRate));
             
         }
