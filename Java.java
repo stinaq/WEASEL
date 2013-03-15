@@ -4,12 +4,9 @@ class Java {
 
     public static void main(String[] args) {
         Application a = new Application();
-        a.run("ipgfuh", 4, 10);
-        
+        a.run("ipgfuh", 4, 10);  
     }
 }
-
-
 
 class Application {
 
@@ -18,13 +15,10 @@ class Application {
         ArrayList<Individual> children = i.reproduceChildren(mutationRate, numberOfChildren);
         for (Individual c : children) {
             System.out.println(c.getLookslike());
-            
         }
     }
-
 }
 
-// import java.lang.StringBuilder; 
 class Individual {
 
     private String lookslike;
@@ -43,17 +37,13 @@ class Individual {
             Individual child = new Individual(reproduceChild(mutationRate));
             children.add(child);
         }
-
-
         return children;
     }
-
 
     private String reproduceChild (int mutationRate) {
         StringBuilder builder = new StringBuilder();
         for(char character : lookslike.toCharArray()) {
-            builder.append(mutateCharacter(character, mutationRate));
-            
+            builder.append(mutateCharacter(character, mutationRate));            
         }
         return builder.toString();
     }
@@ -66,11 +56,7 @@ class Individual {
         } else {
             return character;
         }
-
-        
-
     }
-
 }
 
 
