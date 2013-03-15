@@ -3,12 +3,12 @@ import java.util.ArrayList;
 class Java {
 
     public static void main(String[] args) {
-        Application a = new Application();
-        a.run("ipgfuh", 4, 10);  
+        WeaselWorld a = new WeaselWorld();
+        a.run("ipgfuh", 8, 100);  
     }
 }
 
-class Application {
+class WeaselWorld {
 
     public void run (String goal, int mutationRate, int numberOfChildren) {
         Individual i = new Individual("hieurh");
