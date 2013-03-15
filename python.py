@@ -3,7 +3,7 @@ import random
 
 #returns either the same letter, or a random other, depending on mutation rate
 def random_mutation(character, mutation_rate):
-    if random.randint(0,mutation_rate) == mutation_rate:
+    if random.random() < mutation_rate:
         return random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ ')
     return character
 
@@ -60,8 +60,8 @@ def methinks(mutation_rate, number_of_children):
 
 
 def main():
-    mutation_rate = 100
-    number_of_children = 400
+    mutation_rate = 0.04
+    number_of_children = 100
 
     methinks(mutation_rate, number_of_children)
 
