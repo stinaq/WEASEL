@@ -25,6 +25,10 @@ class Individual {
 
     private String lookslike;
 
+    public String getLookslike () {
+        return this.lookslike;
+    }
+
     public Individual (String lookslike) {
         this.lookslike = lookslike;
     }
