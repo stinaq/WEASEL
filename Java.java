@@ -16,6 +16,11 @@ class Application {
     public void run (String goal, int mutationRate, int numberOfChildren) {
         Individual i = new Individual("hieurh");
         i.reproduceChildren(mutationRate, numberOfChildren);
+        ArrayList<Individual> children = i.reproduceChildren(mutationRate, numberOfChildren);
+        for (Individual c : children) {
+            System.out.println(c.getLookslike());
+            
+        }
     }
 
 }
