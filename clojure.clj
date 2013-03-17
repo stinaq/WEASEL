@@ -54,7 +54,7 @@
   (let [m (fit-map litter goal)]
     (key (first (reverse (sort-by val m))))))
  
-(defn main [& args]
+(defn -main [& args]
   (loop [p parent c 0]
     (println "Current string:" p)
     (let [litter (procreate p)
