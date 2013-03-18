@@ -10,5 +10,14 @@ Algorithm described [here][algorithm].
 + The program should print the fittest string of each generation, as well as the number of generations it took.
 + Mutation rate should be 4%, generation size 100.
 
+
+Benchmarking for fun and profit
+======
+
++ Node: ~0.08s
++ Java: ~0.39s
++ Python: ~0.24s
++ Clojure ~0.80s
+
 [wikipedia]: http://en.wikipedia.org/wiki/Weasel_program
 [algorithm]: http://rationalwiki.org/wiki/Dawkins_weasel
