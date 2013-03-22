@@ -15,7 +15,7 @@ Benchmarking (using testharness) for fun and profit
 ======
 
 + Node: .0615s
-+ Java: ~0.39s
++ Java: .2379
 + Python: ~0.24s
 + Clojure ~0.80s
 
