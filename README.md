@@ -14,9 +14,9 @@ Algorithm described [here][algorithm].
 Benchmarking (using testharness) for fun and profit
 ======
 
-+ Node: .0615s
-+ Java: .2379
-+ Python: ~0.24s
++ Node: 0.0615s
++ Java: 0.2379
++ Python: 0.1791
 + Clojure ~0.80s
 
 [wikipedia]: http://en.wikipedia.org/wiki/Weasel_program
