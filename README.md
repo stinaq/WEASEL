@@ -11,10 +11,10 @@ Algorithm described [here][algorithm].
 + Mutation rate should be 4%, generation size 100.
 
 
-Benchmarking for fun and profit
+Benchmarking (using testharness) for fun and profit
 ======
 
-+ Node: ~0.08s
++ Node: .0615s
 + Java: ~0.39s
 + Python: ~0.24s
 + Clojure ~0.80s
