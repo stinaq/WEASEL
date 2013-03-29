@@ -12,12 +12,15 @@ Algorithm described [here][algorithm].
 
 
 Benchmarking (using testharness) for fun and profit
-======
+------
+
+These tests are as unscientific as it gets and can't be relied on for anything.
 
 + Node: 0.0615s
 + Java: 0.2379
 + Python: 0.1791
 + Clojure ~0.80s
++ Go 0.0172s
 
 [wikipedia]: http://en.wikipedia.org/wiki/Weasel_program
 [algorithm]: http://rationalwiki.org/wiki/Dawkins_weasel
