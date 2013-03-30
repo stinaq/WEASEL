@@ -14,17 +14,23 @@ const (
 )
 
 var (
-	goal     = []byte(GOAL)
-	goallen  = len(GOAL)
-	genepool = []byte("ABCDEFGHIJKLMNOPQRSTUVWXYZ ")
-	parent   = newWeasel()
+	goal        = []byte(GOAL)
+	goallen     = len(GOAL)
+	genepool    = []byte("ABCDEFGHIJKLMNOPQRSTUVWXYZ ")
+	genepoollen = len(genepool)
 )
 
-func randomgene() byte {
-	return genepool[rand.Intn(len(genepool))]
+type weasel struct {
+	fitness int
+	genes   []byte
 }
 
-// TODO: Use channels?
+type litter []*weasel
+
+func randomgene() byte {
+	return genepool[rand.Intn(genepoollen)]
+}
+
 func randomgenes(length int) []byte {
 	result := make([]byte, length, length)
 	for i := range result {
@@ -40,13 +46,10 @@ func mutategene(c byte) byte {
 	return c
 }
 
-type weasel struct {
-	genes []byte
-}
-
 func newWeasel() *weasel {
 	return &weasel{
-		genes: randomgenes(goallen),
+		fitness: 0,
+		genes:   randomgenes(goallen),
 	}
 }
 
@@ -57,58 +60,65 @@ func (w *weasel) procreate() *weasel {
 		ng[i] = mutategene(w.genes[i])
 	}
 	return &weasel{
-		genes: ng,
+		fitness: 0,
+		genes:   ng,
 	}
 }
 
-func creategeneration(p *weasel) []*weasel {
+func (p *weasel) creategeneration() litter {
 	weasels := make([]*weasel, LITTER_SIZE, LITTER_SIZE)
 	for i := range weasels {
 		weasels[i] = p.procreate()
 	}
-	return weasels
+	return litter(weasels)
 }
 
-func (w *weasel) comparetogoal() int {
+func (w *weasel) comparetogoal() {
 	counter := 0
 	for i := range goal {
 		if goal[i] == w.genes[i] {
 			counter++
 		}
 	}
-	return counter
+	w.fitness = counter
 }
 
-func bestmatch(m map[int]*weasel) int {
-	bwk := 0
-	for i, _ := range m {
-		if i > bwk {
-			bwk = i
+func (l litter) bestmatch() *weasel {
+	bw := &weasel{fitness: 0}
+	for i := range l {
+		if l[i].fitness > bw.fitness {
+			bw = l[i]
 		}
 	}
-	return bwk
+	return bw
 }
 
-func findfittest(weasels []*weasel) *weasel {
-	fitmap := make(map[int]*weasel)
-	for i := range weasels {
-		fitmap[weasels[i].comparetogoal()] = weasels[i]
+func calculatefittest(l litter) {
+	for i := range l {
+		l[i].comparetogoal()
 	}
-	bm := bestmatch(fitmap)
-	fmt.Fprintf(os.Stdout, "%d\t", bm)
-	return fitmap[bm]
+}
+
+func (weasels litter) findfittest() *weasel {
+	calculatefittest(weasels)
+	bm := weasels.bestmatch()
+	return bm
+}
+
+func evolution(fittest *weasel, iters int) {
+	nextFittest := fittest.creategeneration().findfittest()
+
+	curr := string(nextFittest.genes)
+	fmt.Fprintf(os.Stdout, "%d\t%d\t%s\n", iters, nextFittest.fitness, curr)
+	if curr == GOAL {
+		return
+	}
+	evolution(nextFittest, (iters + 1))
 }
 
 func main() {
 	rand.Seed(time.Now().UTC().UnixNano())
+	parent := newWeasel()
 
-	cont := true
-	for cont {
-		parent = findfittest(creategeneration(parent))
-		curr := string(parent.genes)
-		fmt.Fprintf(os.Stdout, "%s\n", curr)
-		if curr == GOAL {
-			cont = false
-		}
-	}
+	evolution(parent, 0)
 }
