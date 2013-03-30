@@ -17,10 +17,9 @@ randomCharacter = newStdGen
 	>>= return . (!!) alphabet
 
 mutate :: Char -> IO Char
-mutate c = do
-	newStdGen
-	r <- randomRIO (0.0, 1.0) :: IO Float
-	if r < mutationRate then randomCharacter else return c
+mutate c = newStdGen
+	>> (randomRIO (0.0, 1.0) :: IO Float)
+	>>= \r -> if r < mutationRate then randomCharacter else return c
 
 procreate :: String -> IO [String]
 procreate parent = mapM (mapM mutate) (replicate (length goal) parent)
