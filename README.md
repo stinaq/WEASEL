@@ -16,11 +16,12 @@ Benchmarking (using testharness) for fun and profit
 
 These tests are as unscientific as it gets and can't be relied on for anything.
 
-+ Node: 0.0615s
-+ Java: 0.2379
-+ Python: 0.1791
-+ Clojure ~0.80s
-+ Go 0.0172s
++ Node: 62 ms
++ Java: 238 ms
++ Python: 179 ms
++ Clojure 800 ms
++ Go 17 ms
++ Haskell 150 ms
 
 [wikipedia]: http://en.wikipedia.org/wiki/Weasel_program
 [algorithm]: http://rationalwiki.org/wiki/Dawkins_weasel
