@@ -8,7 +8,7 @@ do
 	$@ >/dev/null
 done) 2>&1)
 
-echo "10 iterations took: "
+echo "100 iterations took: "
 E=$(echo "$T" | tail -n 3 | head -n 1 | cut -c8- | cut -c-5)
 echo "$E / 100" | bc -l | cut -c-5
 echo "Finished."
