@@ -22,6 +22,8 @@ These tests are as unscientific as it gets and can't be relied on for anything.
 + Clojure 800 ms
 + Go 17 ms
 + Haskell 150 ms
++ F# 320 ms
++ D 13 ms
 
 [wikipedia]: http://en.wikipedia.org/wiki/Weasel_program
 [algorithm]: http://rationalwiki.org/wiki/Dawkins_weasel
