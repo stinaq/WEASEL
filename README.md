@@ -35,9 +35,11 @@ first install mono:
 
         apt-get install mono
 
-clone the github repo and follow the instructions there (make && make install)
+clone the [github repo][fsharp-github] and follow the instructions there (make && make install)
 
 then:
 
         fsharpc fsharp.fs
         mono fsharp.exe
+
+[fsharp-github]: https://github.com/fsharp/fsharp
