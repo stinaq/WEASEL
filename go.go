@@ -14,77 +14,77 @@ const (
 )
 
 var (
-	goal        = []byte(GOAL)
-	goallen     = len(GOAL)
-	genepool    = []byte("ABCDEFGHIJKLMNOPQRSTUVWXYZ ")
-	genepoollen = len(genepool)
+	genePool = []Gene("ABCDEFGHIJKLMNOPQRSTUVWXYZ ")
 )
 
-type weasel struct {
-	fitness int
-	genes   []byte
+type Gene byte
+
+func Mutate(g Gene) Gene {
+	if rand.Float64() < RATE {
+		return RandomGene()
+	}
+	return g
 }
 
-type litter []*weasel
-
-func randomgene() byte {
-	return genepool[rand.Intn(genepoollen)]
+func RandomGene() Gene {
+	return Gene(genePool[rand.Intn(len(genePool))])
 }
 
-func randomgenes(length int) []byte {
-	result := make([]byte, length, length)
+func RandomGenes(length int) []Gene {
+	result := make([]Gene, length)
 	for i := range result {
-		result[i] = randomgene()
+		result[i] = RandomGene()
 	}
 	return result
 }
 
-func mutategene(c byte) byte {
-	if rand.Float64() < RATE {
-		return randomgene()
-	}
-	return c
+type Weasel struct {
+	fitness int
+	genes   []Gene
 }
 
-func newWeasel() *weasel {
-	return &weasel{
+func NewWeasel() *Weasel {
+	return &Weasel{
 		fitness: 0,
-		genes:   randomgenes(goallen),
+		genes:   RandomGenes(len(GOAL)),
 	}
 }
 
-func (w *weasel) procreate() *weasel {
-	gl := len(w.genes)
-	ng := make([]byte, gl, gl)
-	for i := range w.genes {
-		ng[i] = mutategene(w.genes[i])
+func (w *Weasel) CreateOffspring() *Weasel {
+	ng := make([]Gene, len(w.genes))
+	copy(ng, w.genes)
+	for i := range ng {
+		ng[i] = Mutate(ng[i])
 	}
-	return &weasel{
+	return &Weasel{
 		fitness: 0,
 		genes:   ng,
 	}
 }
 
-func (p *weasel) creategeneration() litter {
-	weasels := make([]*weasel, LITTER_SIZE, LITTER_SIZE)
+func (w *Weasel) CreateGeneration() Litter {
+	weasels := make([]*Weasel, LITTER_SIZE)
 	for i := range weasels {
-		weasels[i] = p.procreate()
+		weasels[i] = w.CreateOffspring()
 	}
-	return litter(weasels)
+	return Litter(weasels)
 }
 
-func (w *weasel) comparetogoal() {
+func (w *Weasel) CompareToGoal() {
 	counter := 0
-	for i := range goal {
-		if goal[i] == w.genes[i] {
+	goalGenes := []Gene(GOAL)
+	for i := range goalGenes {
+		if goalGenes[i] == w.genes[i] {
 			counter++
 		}
 	}
 	w.fitness = counter
 }
 
-func (l litter) bestmatch() *weasel {
-	bw := &weasel{fitness: 0}
+type Litter []*Weasel
+
+func (l Litter) BestMatch() *Weasel {
+	bw := &Weasel{fitness: 0}
 	for i := range l {
 		if l[i].fitness > bw.fitness {
 			bw = l[i]
@@ -93,22 +93,23 @@ func (l litter) bestmatch() *weasel {
 	return bw
 }
 
-func calculatefittest(l litter) {
+func (l Litter) FindFittest() *Weasel {
 	for i := range l {
-		l[i].comparetogoal()
+		l[i].CompareToGoal()
 	}
+	return l.BestMatch()
 }
 
-func (weasels litter) findfittest() *weasel {
-	calculatefittest(weasels)
-	bm := weasels.bestmatch()
-	return bm
-}
+func evolution(fittest *Weasel, iters int) {
+	nextFittest := fittest.CreateGeneration().FindFittest()
 
-func evolution(fittest *weasel, iters int) {
-	nextFittest := fittest.creategeneration().findfittest()
+	// Convert back to bytes, so it can be cast to a string.
+	bs := make([]byte, len(nextFittest.genes))
+	for i := range bs {
+		bs[i] = byte(nextFittest.genes[i])
+	}
 
-	curr := string(nextFittest.genes)
+	curr := string(bs)
 	fmt.Fprintf(os.Stdout, "%d\t%d\t%s\n", iters, nextFittest.fitness, curr)
 	if curr == GOAL {
 		return
@@ -118,7 +119,5 @@ func evolution(fittest *weasel, iters int) {
 
 func main() {
 	rand.Seed(time.Now().UTC().UnixNano())
-	parent := newWeasel()
-
-	evolution(parent, 0)
+	evolution(NewWeasel(), 0)
 }
