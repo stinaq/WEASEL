@@ -25,6 +25,7 @@ Ubuntu
 Go:
     `apt-get install go`
     `go run go.go`
+
 D:
     `apt-get install gdc`
     `gdc d.d`
