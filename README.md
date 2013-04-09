@@ -31,9 +31,9 @@ Each implementation should, as far as it is feasable, capture the charachteristi
         ./a.out
 
 ###### F#:
-first install mono:
+*   first install mono:
         apt-get install mono
-clone the github repo and follow the instructions there (make && make install)
-then:
+*   clone the github repo and follow the instructions there (make && make install)
+*   then:
         fsharpc fsharp.fs
         mono fsharp.exe
