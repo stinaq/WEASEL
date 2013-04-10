@@ -41,7 +41,7 @@ Below are the basic instructions to run the code examples, sorted by OS -> Langu
     gdc d.d
     ./a.out
 
-### F\#:
+### F\#
 first install mono:
 
         apt-get install mono
