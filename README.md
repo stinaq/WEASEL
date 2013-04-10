@@ -1,5 +1,4 @@
-A whole lotta weasels
-======
+# A whole lotta weasels
 
 A joint effort to write the [Dawkins' Weasel algorithm][wikipedia] in as many languages as possible, using the language's specific idioms.
 
@@ -16,21 +15,33 @@ Each implementation should, as far as it is feasable, capture the charachteristi
 [wikipedia]: http://en.wikipedia.org/wiki/Weasel_program
 [algorithm]: http://rationalwiki.org/wiki/Dawkins_weasel
 
-### Building the examples:
+=======
+# Building the examples:
 
-#### (Linuxes)
+Below are the basic instructions to run the code examples, sorted by OS -> Language.
 
-##### Ubuntu
+## Ubuntu
 
-###### Go:
-        apt-get install go
-        go run go.go
-###### D:
-        apt-get install gdc
-        gdc d.d
-        ./a.out
+### Python
 
-###### F\#:
+    python python.py
+
+### Haskell
+
+    runhaskell haskell.hs
+
+### Go
+
+    apt-get install go
+    go run go.go
+
+### D
+
+    apt-get install gdc
+    gdc d.d
+    ./a.out
+
+### F\#:
 first install mono:
 
         apt-get install mono
@@ -43,3 +54,4 @@ then:
         mono fsharp.exe
 
 [fsharp-github]: https://github.com/fsharp/fsharp
+
