@@ -30,7 +30,7 @@ Each implementation should, as far as it is feasable, capture the charachteristi
         gdc d.d
         ./a.out
 
-###### F#:
+###### F\#:
 first install mono:
 
         apt-get install mono
