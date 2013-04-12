@@ -15,6 +15,7 @@ Each implementation should, as far as it is feasable, capture the charachteristi
 [wikipedia]: http://en.wikipedia.org/wiki/Weasel_program
 [algorithm]: http://rationalwiki.org/wiki/Dawkins_weasel
 
+=======
 # Building the examples:
 
 Below are the basic instructions to run the code examples, sorted by OS -> Language.
@@ -24,7 +25,7 @@ Below are the basic instructions to run the code examples, sorted by OS -> Langu
 ### Python
 
     python python.py
-    
+
 ### Haskell
 
     runhaskell haskell.hs
@@ -40,11 +41,17 @@ Below are the basic instructions to run the code examples, sorted by OS -> Langu
     gdc d.d
     ./a.out
 
-### F#
+### F\#
+first install mono:
 
-- first install mono:
-    `apt-get install mono`
-- clone the github repo and follow the instructions there (make && make install)
-- then:
-    `fsharpc fsharp.fs`
-    `mono fsharp.exe`
+        apt-get install mono
+
+clone the [github repo][fsharp-github] and follow the instructions there (make && make install)
+
+then:
+
+        fsharpc fsharp.fs
+        mono fsharp.exe
+
+[fsharp-github]: https://github.com/fsharp/fsharp
+
