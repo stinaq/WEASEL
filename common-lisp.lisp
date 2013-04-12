@@ -2,7 +2,7 @@
 
 (defvar factor 0.04)
 (defvar litter-size 100)
-(defvar uber-weasel "METHINKS IT IS LIKE A WEASEL")
+(defvar uber-weasel (coerce "METHINKS IT IS LIKE A WEASEL" 'list))
 (defvar gene-pool "ABCDEFGHIJKLMNOPQRSTUVWXYZ ")
 
 (defun random-gene ()
@@ -13,42 +13,43 @@
 
 (defclass weasel ()
   ((genes :accessor genes
-          :initform (coerce (random-genes (length uber-weasel)) 'string)
+          :initform (random-genes (length uber-weasel))
           :initarg :genes)))
 
 (defun mutate-genes (genes)
-  (coerce (mapcar (lambda (c)
-             (if (< (random 1.0) factor)
-                 (random-gene)
-                 c)) (copy-seq (coerce genes 'list))) 'string))
+  (mapcar (lambda (c)
+            (if (< (random 1.0) factor)
+                (random-gene)
+                c))
+          genes))
 
 (defmethod create-litter ((w weasel))
   (loop for i to litter-size
      collect (make-instance 'weasel :genes (mutate-genes (genes w)))))
 
 (defmethod compare-to-goal ((w weasel))
-  (let ((a (coerce (genes w) 'list))
-        (b (coerce uber-weasel 'list)))
-    (reduce #'+ (mapcar #'(lambda (q w)
-                 (if (char= q w) 1 0)) a b))))
+  (reduce #'+ (mapcar #'(lambda (q w)
+                          (if (char= q w) 1 0))
+                      (genes w) uber-weasel)))
 
-(defun weasel< (a b)
+(defun weasel> (a b) ;descending
   (> (compare-to-goal a) (compare-to-goal b)))
 
 (defun get-best (litter)
-  (car;nth litter-size
+  (car
    (sort
-    (copy-seq litter) #'weasel<)))
+    (copy-seq litter) #'weasel>)))
 
 (defun evolution (weasel count)
-  (format t "~D -> ~a~%"
-          count (genes weasel))
-  (if (string=
-       (genes weasel) uber-weasel)
-      '(count uber-weasel)
-      (evolution
-       (get-best (create-litter weasel)) (+ 1 count))))
+  (let ((gene-string (coerce (genes weasel) 'string)))
+    (format t "~D -> ~a~%"
+            count gene-string)
+    (if (equal
+         (genes weasel) uber-weasel)
+        (list count (coerce uber-weasel 'string))
+        (evolution
+         (get-best (create-litter weasel)) (+ 1 count)))))
 
-(evolution (make-instance 'weasel) 0)
+(print (evolution (make-instance 'weasel) 0))
 
 
