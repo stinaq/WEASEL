@@ -55,3 +55,12 @@ then:
 
 [fsharp-github]: https://github.com/fsharp/fsharp
 
+### Common Lisp
+install:
+
+    apt-get install sbcl
+
+run:
+
+    sbcl --script common-lisp.lisp
+
