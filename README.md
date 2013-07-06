@@ -41,7 +41,7 @@ Below are the basic instructions to run the code examples, sorted by OS -> Langu
     gdc d.d
     ./a.out
 
-### F\#
+### F&#35;
 first install mono:
 
         apt-get install mono
@@ -64,3 +64,9 @@ run:
 
     sbcl --script common-lisp.lisp
 
+### Coffeescript
+-install node via apt-get
+-install coffee-script via npm
+-run:
+
+    coffee coffee-script.coffee
