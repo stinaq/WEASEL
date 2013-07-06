@@ -65,8 +65,9 @@ run:
     sbcl --script common-lisp.lisp
 
 ### Coffeescript
--install node via apt-get
--install coffee-script via npm
--run:
+
++ install node via apt-get
++ install coffee-script via npm
++ run:
 
     coffee coffee-script.coffee
