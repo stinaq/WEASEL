@@ -66,8 +66,8 @@ run:
 
 ### Coffeescript
 
-+ install node via apt-get
-+ install coffee-script via npm
-+ run:
+1. install node via apt-get
+2. install coffee-script via npm
+3. run:
 
-    coffee coffee-script.coffee
+        coffee coffee-script.coffee
