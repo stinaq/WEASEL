@@ -71,3 +71,13 @@ run:
 3. run:
 
         coffee coffee-script.coffee
+		
+		
+### Nimrod
+
+	1. Compile Nimrod from the github sources
+	2. run:
+	
+		nimrod -r nimrod.nim
+		
+		
