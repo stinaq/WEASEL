@@ -1,4 +1,4 @@
-(ns clojure)
+(ns weasel)
 
 (def characters "ABCDEFGHIJKLMNOPQRSTUVWXYZ ")
 
