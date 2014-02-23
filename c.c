@@ -110,7 +110,7 @@ main(void) {
   init_weasel(w, NULL);
 
   int counter = 0;
-  while (get_score(w) != strlen(PERFECT_GENES) && counter < 150) {
+  while (get_score(w) != strlen(PERFECT_GENES)) {
     printf("Genes: [%s], Score: %i, Iteration: %i\n", w->genes, get_score(w), ++counter);
     weasel_procreate(w, children);
     qsort(children, LITTER_SIZE, sizeof(Weasel), cmp_weasels);
