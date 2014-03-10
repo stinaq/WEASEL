@@ -1,5 +1,12 @@
 /**
    Weasel implementaion
+   to compile:
+   [clang|gcc] -pipe -m64 -ansi -fPIC -g -O3 -fno-exceptions -fstack-protector \
+     -fvisibility=hidden -W -Wall -Wno-unused-parameter -Wno-unused-function \
+     -Wno-unused-label -Wpointer-arith -Wformat -Wreturn-type -Wsign-compare \
+     -Wmultichar -Wformat-nonliteral -Winit-self -Wuninitialized \
+     -Wno-deprecated -Wformat-security -Werror -std=c11 -c c.c
+
 **/
 
 #include <stdlib.h>
@@ -60,7 +67,7 @@ init_weasel(Weasel* w, char* parent_genes) {
   }
 
   gs[GENE_COUNT] = '\0';
-  w->genes = strdup(gs);
+  strcpy(w->genes, gs);
   return 0;
 }
 
@@ -74,7 +81,7 @@ weasel_procreate(Weasel* parent, Weasel* children) {
 }
 
 
-int
+unsigned long
 get_score(Weasel* w) {
   const int GENE_COUNT = strlen(PERFECT_GENES);
   int score = 0;
@@ -82,7 +89,7 @@ get_score(Weasel* w) {
     if (w->genes[i] == PERFECT_GENES[i]) { score++; }
   }
 
-  return score;
+  return (unsigned long)score;
 }
 
 
@@ -111,7 +118,7 @@ main(void) {
 
   int counter = 0;
   while (get_score(w) != strlen(PERFECT_GENES)) {
-    printf("Genes: [%s], Score: %i, Iteration: %i\n", w->genes, get_score(w), ++counter);
+    printf("Genes: [%s], Score: %lu, Iteration: %i\n", w->genes, get_score(w), ++counter);
     weasel_procreate(w, children);
     qsort(children, LITTER_SIZE, sizeof(Weasel), cmp_weasels);
     *w = children[0];
