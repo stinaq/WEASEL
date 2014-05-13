@@ -1,3 +1,6 @@
+// For strdup to work
+#define _POSIX_C_SOURCE 200809L
+
 /**
    Weasel implementaion
    to compile:
@@ -19,6 +22,7 @@ const char* GENES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
 const char* PERFECT_GENES = "METHINKS IT IS LIKE A WEASEL";
 const int MUTATION_FACTOR = 4; // percent
 const int LITTER_SIZE = 100;
+
 
 typedef struct {
   char* genes;
@@ -67,7 +71,7 @@ init_weasel(Weasel* w, char* parent_genes) {
   }
 
   gs[GENE_COUNT] = '\0';
-  strcpy(w->genes, gs);
+  w->genes = strdup(gs);
   return 0;
 }
 
@@ -77,6 +81,7 @@ weasel_procreate(Weasel* parent, Weasel* children) {
   for (int i = 0; i < LITTER_SIZE; i++) {
     init_weasel(&children[i], parent->genes);
   }
+
   return 0;
 }
 
@@ -100,10 +105,14 @@ cmp_weasels(const void* a, const void* b) {
      negative result means weasel A was better
      0 means they are equally good
      positive means weasel B was better
+
+     parameters are (void *)s since the qsort
+     requires them to be such.
   **/
   Weasel* wa = (Weasel*)a; Weasel* wb = (Weasel*)b;
   int a_score = get_score(wa);
   int b_score = get_score(wb);
+
   return b_score - a_score;
 }
 
@@ -122,6 +131,11 @@ main(void) {
     weasel_procreate(w, children);
     qsort(children, LITTER_SIZE, sizeof(Weasel), cmp_weasels);
     *w = children[0];
+
+    // free the memory used by the inferior weasels.
+    for (int i = 1; i < LITTER_SIZE; i++) {
+      free(children[i].genes);
+    }
   }
 
   printf("Winner: %s, after %i generations!\n", w->genes, counter);
