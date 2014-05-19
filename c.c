@@ -1,5 +1,15 @@
+// For strdup to work
+#define _POSIX_C_SOURCE 200809L
+
 /**
    Weasel implementaion
+   to compile:
+   [clang|gcc] -pipe -m64 -ansi -fPIC -g -O3 -fno-exceptions -fstack-protector \
+     -fvisibility=hidden -W -Wall -Wno-unused-parameter -Wno-unused-function \
+     -Wno-unused-label -Wpointer-arith -Wformat -Wreturn-type -Wsign-compare \
+     -Wmultichar -Wformat-nonliteral -Winit-self -Wuninitialized \
+     -Wno-deprecated -Wformat-security -Werror -std=c11 -c c.c
+
 **/
 
 #include <stdlib.h>
@@ -12,6 +22,7 @@ const char* GENES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
 const char* PERFECT_GENES = "METHINKS IT IS LIKE A WEASEL";
 const int MUTATION_FACTOR = 4; // percent
 const int LITTER_SIZE = 100;
+
 
 typedef struct {
   char* genes;
@@ -70,11 +81,12 @@ weasel_procreate(Weasel* parent, Weasel* children) {
   for (int i = 0; i < LITTER_SIZE; i++) {
     init_weasel(&children[i], parent->genes);
   }
+
   return 0;
 }
 
 
-int
+unsigned long
 get_score(Weasel* w) {
   const int GENE_COUNT = strlen(PERFECT_GENES);
   int score = 0;
@@ -82,7 +94,7 @@ get_score(Weasel* w) {
     if (w->genes[i] == PERFECT_GENES[i]) { score++; }
   }
 
-  return score;
+  return (unsigned long)score;
 }
 
 
@@ -93,10 +105,14 @@ cmp_weasels(const void* a, const void* b) {
      negative result means weasel A was better
      0 means they are equally good
      positive means weasel B was better
+
+     parameters are (void *)s since the qsort
+     requires them to be such.
   **/
   Weasel* wa = (Weasel*)a; Weasel* wb = (Weasel*)b;
   int a_score = get_score(wa);
   int b_score = get_score(wb);
+
   return b_score - a_score;
 }
 
@@ -111,10 +127,15 @@ main(void) {
 
   int counter = 0;
   while (get_score(w) != strlen(PERFECT_GENES)) {
-    printf("Genes: [%s], Score: %i, Iteration: %i\n", w->genes, get_score(w), ++counter);
+    printf("Genes: [%s], Score: %lu, Iteration: %i\n", w->genes, get_score(w), ++counter);
     weasel_procreate(w, children);
     qsort(children, LITTER_SIZE, sizeof(Weasel), cmp_weasels);
     *w = children[0];
+
+    // free the memory used by the inferior weasels.
+    for (int i = 1; i < LITTER_SIZE; i++) {
+      free(children[i].genes);
+    }
   }
 
   printf("Winner: %s, after %i generations!\n", w->genes, counter);
