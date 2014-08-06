@@ -17,13 +17,7 @@ def make_child(parent, mutation_rate):
 
 #decides how 'fit' the child is, how similar it is to the goal
 def fitness(current, goal):
-    i = 0
-    points = 0
-    for s in current:
-        if s == goal[i]:
-            points = points + 1
-        i = i + 1
-    return points
+    return sum(current[i] == goal[i] for i in range(len(goal)))
 
 #takes a parent and makes a number of childen, returns the fittest one
 def make_best_child(parent, goal, mutation_rate, number_of_children):
