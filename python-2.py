@@ -15,11 +15,7 @@ def fitness(child, target_string):
     return sum([1 for c in zip(child,target_string) if c[0] == c[1]])
 
 def fittest(list_of_children, target_string):
-    winner = list_of_children[0]
-    for c in list_of_children:
-        if fitness(c, target_string) > fitness(winner, target_string):
-            winner = c
-    return winner
+    return max(list_of_children, key=lambda x: fitness(x, target_string))
 
 def main():
     alphabet = 'abcdefghijklmnopqrstuvwxyz '
