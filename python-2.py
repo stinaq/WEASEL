@@ -1,4 +1,4 @@
-import random, sys
+import random
 
 def mutate(character, mutation_rate, alphabet):
     if mutation_rate >= random.random():
@@ -25,18 +25,17 @@ def main():
     generation_size = 400
 
     current = random_start_string
-    rounds = 0
+    rounds = 1
 
-    while(True):
+    print("Current string: %s" % current)
+    while(current != target_string):
         cs = children(current, mutation_rate, generation_size, alphabet)
         current = fittest(cs, target_string)
 
         print("Current string: %s" % current)
         rounds += 1
 
-        if current == target_string:
-            print("Finished after %d rounds!" % rounds)
-            sys.exit(0)
+    print("Finished after %d rounds!" % rounds)
 
 if __name__ == '__main__':
     main()
