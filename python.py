@@ -50,8 +50,8 @@ def methinks(mutation_rate, number_of_children):
 
     generation_count = 1
     while(goal_fitness != current_fitness):
-        current_fitness = fitness(current, goal)
         current = make_best_child(current, goal, mutation_rate, number_of_children)
+        current_fitness = fitness(current, goal)
         generation_count = generation_count + 1
         print(current)
     print("finished at generation")
