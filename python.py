@@ -35,7 +35,7 @@ def make_best_child(parent, goal, mutation_rate, number_of_children):
         if best_fitness < current_fitness:
             best_child = current_child
             best_fitness = current_fitness
-    return best_child
+    return (best_child, best_fitness)
 
 #sets the goal string, creates random start string, makes generations of children to find one that looks like the goal
 def methinks(mutation_rate, number_of_children):
@@ -50,8 +50,8 @@ def methinks(mutation_rate, number_of_children):
 
     generation_count = 1
     while(goal_fitness != current_fitness):
-        current = make_best_child(current, goal, mutation_rate, number_of_children)
-        current_fitness = fitness(current, goal)
+        (current, current_fitness) = make_best_child(current, goal,
+                mutation_rate, number_of_children)
         generation_count = generation_count + 1
         print(current)
     print("finished at generation")
