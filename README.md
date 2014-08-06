@@ -79,5 +79,7 @@ run:
 	2. run:
 	
 		nimrod -r nimrod.nim
-		
-		
+
+### perl
+
+    perl perl.pl
