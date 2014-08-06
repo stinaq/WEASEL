@@ -35,11 +35,11 @@ def main():
         cs = children(current, mutation_rate, generation_size, alphabet)
         current = fittest(cs, target_string)
 
-        print "Current string: %s" % current
+        print("Current string: %s" % current)
         rounds += 1
 
         if current == target_string:
-            print "Finished after %d rounds!" % rounds
+            print("Finished after %d rounds!" % rounds)
             sys.exit(0)
 
 if __name__ == '__main__':

@@ -46,16 +46,16 @@ def methinks(mutation_rate, number_of_children):
     for i in range(0, len(goal)):
         current = current + random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ ')
     current_fitness = fitness(current, goal)
-    print current
+    print(current)
 
     generation_count = 1
     while(goal_fitness != current_fitness):
         current_fitness = fitness(current, goal)
         current = make_best_child(current, goal, mutation_rate, number_of_children)
         generation_count = generation_count + 1
-        print current
-    print "finished at generation"
-    print generation_count
+        print(current)
+    print("finished at generation")
+    print(generation_count)
 
 
 
