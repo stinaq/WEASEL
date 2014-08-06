@@ -17,13 +17,7 @@ def make_child(parent, mutation_rate):
 
 #decides how 'fit' the child is, how similar it is to the goal
 def fitness(current, goal):
-    i = 0
-    points = 0
-    for s in current:
-        if s == goal[i]:
-            points = points + 1
-        i = i + 1
-    return points
+    return sum(current[i] == goal[i] for i in range(len(goal)))
 
 #takes a parent and makes a number of childen, returns the fittest one
 def make_best_child(parent, goal, mutation_rate, number_of_children):
@@ -35,7 +29,7 @@ def make_best_child(parent, goal, mutation_rate, number_of_children):
         if best_fitness < current_fitness:
             best_child = current_child
             best_fitness = current_fitness
-    return best_child
+    return (best_child, best_fitness)
 
 #sets the goal string, creates random start string, makes generations of children to find one that looks like the goal
 def methinks(mutation_rate, number_of_children):
@@ -46,16 +40,16 @@ def methinks(mutation_rate, number_of_children):
     for i in range(0, len(goal)):
         current = current + random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ ')
     current_fitness = fitness(current, goal)
-    print current
+    print(current)
 
     generation_count = 1
     while(goal_fitness != current_fitness):
-        current_fitness = fitness(current, goal)
-        current = make_best_child(current, goal, mutation_rate, number_of_children)
+        (current, current_fitness) = make_best_child(current, goal,
+                mutation_rate, number_of_children)
         generation_count = generation_count + 1
-        print current
-    print "finished at generation"
-    print generation_count
+        print(current)
+    print("finished at generation")
+    print(generation_count)
 
 
 
