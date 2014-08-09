@@ -16,11 +16,18 @@ Each implementation should, as far as it is feasable, capture the charachteristi
 [algorithm]: http://rationalwiki.org/wiki/Dawkins_weasel
 
 =======
+# Instructions
+
+* Fork this repository
+* Write your Weasel in the desired language.
+* Name the file after the language, add "-number" to the end if an implementation already exists.
+* Add instructions on how to run the code, including instructions on how to install dependencies in the README.md file
+* Creata a pull request
+
+=======
 # Building the examples:
 
 Below are the basic instructions to run the code examples, sorted by OS -> Language.
-
-## Ubuntu
 
 ### Python
 
