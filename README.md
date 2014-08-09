@@ -15,7 +15,6 @@ Each implementation should, as far as it is feasable, capture the charachteristi
 [wikipedia]: http://en.wikipedia.org/wiki/Weasel_program
 [algorithm]: http://rationalwiki.org/wiki/Dawkins_weasel
 
-=======
 # Instructions
 
 * Fork this repository
@@ -24,8 +23,9 @@ Each implementation should, as far as it is feasable, capture the charachteristi
 * Add instructions on how to run the code, including instructions on how to install dependencies in the README.md file
 * Creata a pull request
 
-=======
 # Building the examples:
+
+*Installation instructions can assume that the users have Homebrew[homebrew] (OSX) or Chocolatey[chocolatey] (Windows)*
 
 Below are the basic instructions to run the code examples, sorted by OS -> Language.
 
@@ -86,6 +86,9 @@ run:
 	2. run:
 	
 		nimrod -r nimrod.nim
+
+[homebrew]: http://brew.sh/
+[chocolatey]: https://chocolatey.org/
 
 ### perl
 
