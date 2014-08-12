@@ -83,3 +83,16 @@ run:
 ### perl
 
     perl perl.pl
+
+### Visual Basic 6
+
+1. Start Visual Basic 6
+2. Select "Standard EXE" from the new projects dialog
+3. Add "visual-basic-6.mod" to the project ("Add Module")
+4. Double click on the form to enter `Form_Load()` event
+5. Type `Call WeaselProgram` in the event
+6. Hit F5 to run
+
+Since VB6 is the base for VBScript, the VB6 weasel can easily be converted to VBScipt. For example  to run in Excel, create a new macro and replace `Debug.Print ` with `Range("A" & excel_row).Value = `, where `excel_row` is an incrementing variable for keeping track of the current row.
+
+
