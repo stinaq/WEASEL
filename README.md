@@ -115,3 +115,9 @@ run:
 Since VB6 is the base for VBScript, the VB6 weasel can easily be converted to VBScipt. For example  to run in Excel, create a new macro and replace `Debug.Print ` with `Range("A" & excel_row).Value = `, where `excel_row` is an incrementing variable for keeping track of the current row.
 
 
+### Erlang ###
+
+install latest erlang platform
+
+`erlc weasel_erlang.erl`
+`erl -noshell -run weasel_erlang main`
