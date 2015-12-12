@@ -9,6 +9,11 @@
 -define(MUT_CHANCE, 0.04).
 -define(LITTER_SIZE, 100).
 
+main() ->
+    evolution(),
+    erlang:halt(0).
+
+
 %% if called with no arguments, just fetch a random gene.
 random_gene()  ->
     [lists:nth(rand:uniform(length(?GENE_POOL)), ?GENE_POOL)].
