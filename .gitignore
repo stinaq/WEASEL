@@ -5,3 +5,6 @@
 *.o
 *.beam
 *.dump
+nim
+nimcache/
+

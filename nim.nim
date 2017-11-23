@@ -1,4 +1,4 @@
-import math, times
+import math, times, random
 
 const
   UltraWeasel = "methinks it is like a weasel"
@@ -8,7 +8,7 @@ const
   MutationFactor = 4
 
 proc randomGene(): char =
-  return GenePool[math.random(GenePool.len)]
+  return GenePool[random.random(GenePool.len)]
 
 type
   TWeasel = object of TObject
@@ -24,7 +24,7 @@ method calculateScore(w: var TWeasel) =
 method createChild(w: TWeasel): TWeasel =
   result = TWeasel(genes: w.genes)
   for i, g in result.genes:
-    if math.random(100) < MutationFactor:
+    if random.random(100) < MutationFactor:
       result.genes[i] = randomGene()
   result.calculateScore()
 
@@ -52,7 +52,7 @@ proc main(w: TWeasel, counter: int) =
 
   main(bestOfLitter, counter + 1)
 
-math.randomize(cast[int](times.epochTime()))
+random.randomize(cast[int](times.epochTime()))
 echo("Gen\tScore\tGenes")
 echo("===\t=====\t=====")
 main(newWeasel(), 1)
