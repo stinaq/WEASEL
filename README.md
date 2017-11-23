@@ -91,10 +91,10 @@ run:
 		
 ### Nimrod
 
-	1. Compile Nimrod from the github sources
+	1. install nim (e.g. apt install nim)
 	2. run:
 	
-		nimrod -r nimrod.nim
+		nimrod c -r nim.nim
 
 [homebrew]: http://brew.sh/
 [chocolatey]: https://chocolatey.org/
