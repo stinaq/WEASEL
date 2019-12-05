@@ -3,3 +3,8 @@
 *.exe
 *.out
 *.o
+*.beam
+*.dump
+nim
+nimcache/
+

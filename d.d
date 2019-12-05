@@ -13,7 +13,7 @@ int main () {
 
 class Genetics {
 private:
-  const string genePool = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
+  const static string genePool = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
 
   static void evolution(Weasel w, int iters) {
     writefln("%d\t%d\t%s", iters, w.fitness, w.genes);
@@ -27,9 +27,9 @@ private:
   }
 
 public:
-  const string uberGenes = "METHINKS IT IS LIKE A WEASEL";
-  const float factor = 0.04;
-  const int litterSize = 100;
+  const static string uberGenes = "METHINKS IT IS LIKE A WEASEL";
+  const static float factor = 0.04;
+  const static int litterSize = 100;
 
   static char randomGene () {
     return genePool[uniform(0, genePool.length)];

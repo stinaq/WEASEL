@@ -1,4 +1,4 @@
-import math, times
+import math, times, random
 
 const
   UltraWeasel = "methinks it is like a weasel"
@@ -8,27 +8,27 @@ const
   MutationFactor = 4
 
 proc randomGene(): char =
-  return GenePool[math.random(GenePool.len)]
+  return GenePool[random.random(GenePool.len)]
 
 type
-  TWeasel = object of TObject
+  TWeasel = object of RootObj
     genes: string
     score: int
 
-method calculateScore(w: var TWeasel) =
+method calculateScore(w: var TWeasel) {. base .} =
   w.score = 0
   for i, g in w.genes:
     if g == UltraWeasel[i]:
       w.score += 1
 
-method createChild(w: TWeasel): TWeasel =
+method createChild(w: TWeasel): TWeasel {. base .} =
   result = TWeasel(genes: w.genes)
   for i, g in result.genes:
-    if math.random(100) < MutationFactor:
+    if random.random(100) < MutationFactor:
       result.genes[i] = randomGene()
   result.calculateScore()
 
-method createLitter(w: TWeasel): seq[TWeasel] =
+method createLitter(w: TWeasel): seq[TWeasel] {. base .} =
   result = @[]
   for i in 1..LitterSize:
     result.add(w.createChild())
@@ -46,13 +46,13 @@ proc main(w: TWeasel, counter: int) =
     return
   let litter = w.createLitter()
   var bestOfLitter = litter[0]
-  for i in 1..litter.len - 1:
+  for i in 0..litter.len - 1:
     if litter[i].score > bestOfLitter.score:
       bestOfLitter = litter[i]
 
   main(bestOfLitter, counter + 1)
 
-math.randomize(cast[int](times.epochTime()))
+random.randomize(cast[int](times.epochTime()))
 echo("Gen\tScore\tGenes")
 echo("===\t=====\t=====")
 main(newWeasel(), 1)
